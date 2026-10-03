@@ -1,182 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AI agents in simple words: what they are and how to start — Vinod Pawar</title>
 <meta name="description" content="A plain-language guide to AI agents: what they are, how they work, what you can try today, and how to stay safe.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0D1414; --bg-line:#152020; --text:#ECEEEA; --muted:#8FA39C;
-  --amber:#E8A33D; --mint:#6FCF97; --border:#243333;
-}
-:root[data-theme="light"]{
-  --bg:#F3F1EC; --bg-line:#E7E3DA; --text:#1B1E1D; --muted:#5B665F;
-  --amber:#B9701E; --mint:#2F8F5E; --border:#DAD5C9;
-}
-*{box-sizing:border-box;}
-body{
-  margin:0; background:var(--bg); color:var(--text);
-  font-family:'Inter',sans-serif; font-size:17px; line-height:1.75;
-  background-image:
-    linear-gradient(var(--bg-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--bg-line) 1px, transparent 1px);
-  background-size:36px 36px;
-}
-a{color:var(--amber); text-decoration:none;}
-a:hover{color:var(--mint);}
-a:focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
-.wrap{max-width:660px; margin:0 auto; padding:32px 20px 80px;}
-.back{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--muted); display:inline-block; margin-bottom:34px;}
-.back:hover{color:var(--amber);}
-.post-date{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted); margin-bottom:8px;}
-h1{ font-family:'Fraunces', serif; font-weight:600; font-size:36px; letter-spacing:-0.01em; margin:0 0 14px; line-height:1.2; }
-.lede{color:var(--muted); font-size:18px; margin:0 0 30px;}
-h2{ font-family:'Fraunces', serif; font-weight:500; font-size:24px; margin:44px 0 12px; line-height:1.3; }
-p{margin:0 0 18px;}
-ul,ol{margin:0 0 20px; padding-left:22px;}
-li{margin-bottom:10px;}
-strong{font-weight:600;}
-figure{margin:30px 0;}
-figure svg{width:100%; height:auto; display:block;}
-figcaption{font-size:13px; color:var(--muted); margin-top:8px;}
-.note{border-left:3px solid var(--amber); padding:2px 0 2px 16px; margin:26px 0; color:var(--muted);}
-footer{color:var(--muted); font-size:13px; padding-top:36px; margin-top:44px; border-top:1px solid var(--border);}
-
-/* svg styling */
-.box{fill:var(--bg); stroke:var(--muted); stroke-width:1.5;}
-.box-a{fill:var(--bg); stroke:var(--amber); stroke-width:2;}
-.panel{fill:none; stroke:var(--border); stroke-width:1.5;}
-.t{fill:var(--text); font:500 14px Inter,sans-serif;}
-.tm{fill:var(--muted); font:12px Inter,sans-serif;}
-.th{fill:var(--amber); font:500 12px 'IBM Plex Mono',monospace;}
-.ln{stroke:var(--muted); stroke-width:1.5; fill:none;}
-.ah{fill:var(--muted);}
+:root{--bg:#eef1f8;--ink:#0d1b3e;--muted:#4f5b7a;--line:#cdd4e6;--accent:#2a4bff;--soft:#e0e6f6;
+--sans:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+:root[data-theme=dark]{--bg:#0a1126;--ink:#e9edfb;--muted:#9aa6c9;--line:#212c52;--accent:#8ea6ff;--soft:#121b3a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:19px/1.7 var(--sans);padding-top:env(safe-area-inset-top,0)}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:26px;padding-bottom:10px}
+.logo{font-weight:800;font-size:22px;letter-spacing:-.04em;text-decoration:none;color:var(--ink)}
+nav{display:flex;align-items:center;gap:22px;font-size:16px;flex-wrap:wrap;justify-content:flex-end}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover,nav a[aria-current]{color:var(--accent)}
+#theme{background:none;border:1px solid var(--line);border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:15px}
+.head{padding:64px 0 40px}
+.back{font-size:16px;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--accent)}
+h1{font-size:clamp(36px,6.5vw,76px);line-height:1;letter-spacing:-.045em;font-weight:800;margin:24px 0 20px;max-width:14em}
+time{font:14px var(--mono);color:var(--muted)}
+article{border-top:1px solid var(--line);padding:48px 0 64px}
+.prose{max-width:38em}
+.prose p{margin:0 0 1.3em}
+.prose .lede{font-size:clamp(22px,2.6vw,28px);line-height:1.4;letter-spacing:-.02em}
+.prose h2{font-size:28px;letter-spacing:-.03em;line-height:1.2;margin:1.8em 0 .5em}
+.prose ul,.prose ol{margin:0 0 1.3em;padding-left:1.2em}
+.prose li{margin-bottom:.4em}
+.prose code{font:.85em var(--mono);background:var(--soft);padding:2px 6px;border-radius:5px}
+.prose pre{background:var(--soft);padding:16px;border-radius:10px;overflow-x:auto;font:14px/1.6 var(--mono)}
+.prose blockquote{margin:0 0 1.3em;padding-left:20px;border-left:3px solid var(--accent);color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:32px 0 calc(56px + env(safe-area-inset-bottom,0));color:var(--muted);font-size:15px}
+@media(max-width:820px){.head{padding-top:40px}}
+.fig{margin:2em 0;background:var(--soft);border-radius:14px;padding:22px}
+.fig figcaption{font-size:15px;color:var(--muted);margin-top:14px;font-style:italic}
+.fl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:15px;margin:0 0 10px}
+.fl b{font:13px var(--mono);color:var(--accent);min-width:74px}
+.fl span{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 12px}
+.fl i{color:var(--muted);font-style:normal}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:15px}
+.ba b{font:13px var(--mono);color:var(--accent)}
+.ba ol{margin:8px 0 0;padding-left:1.2em}
+.ba p{margin:8px 0 0;color:var(--muted)}
+.loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:15px}
+.loop span{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 12px}
+@media(max-width:600px){.ba{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">← back to blog</a>
+<header><div class="wrap">
+  <a class="logo" href="/">VP</a>
+  <nav>
+    <a href="/">Home</a><a href="/submeter">Apps</a><a href="/blog/" aria-current="page">Blog</a>
+    <a href="https://github.com/vinodpawar">GitHub</a>
+    <button id="theme" aria-label="Toggle light and dark theme">🌓</button>
+  </nav>
+</div></header>
 
-  <article>
-    <div class="post-date">28 September 2026</div>
-    <h1>AI agents in simple words: what they are and how to start</h1>
-    <p class="lede">Everyone keeps saying "AI agents". I wanted to understand what that actually means, so I tried a few. Here is what I found, without the jargon.</p>
-
-    <h2>The chore that got me curious</h2>
-    <p>I own a house with a few tenants, and every month I did the same electricity bill routine. I took photos of each submeter. I read the total from the MSEB bill. I split it by hand, worked out one tenant's share on the MSEB website, and then typed a separate WhatsApp message to every tenant.</p>
-    <p>It was not hard. It was just boring, and boring jobs are exactly what AI tools are good at. That is what pushed me to look properly at AI agents, and then to build a small billing app with AI helping me along the way.</p>
-
-    <h2>So what is an AI agent?</h2>
-    <p>You already know chatbots. You ask a question, it gives an answer, and then it waits. If you want something done, you do it yourself.</p>
-    <p>An agent is different. You give it a goal, and it goes and works on it. It can open a website, edit a file, run a program, or check its own work. When it is finished, it comes back and tells you what happened.</p>
-
-    <figure>
-      <svg viewBox="0 0 600 235" role="img" aria-labelledby="f1t f1d">
-        <title id="f1t">Chatbot versus agent</title>
-        <desc id="f1d">A chatbot answers a question and you do the rest. An agent takes a goal, uses tools, and reports back with the job done.</desc>
-        <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
-        <text class="th" x="10" y="26">CHATBOT</text>
-        <rect class="box" x="10" y="38" width="90" height="44" rx="8"/><text class="t" x="55" y="65" text-anchor="middle">You</text>
-        <line class="ln" x1="100" y1="60" x2="252" y2="60" marker-end="url(#a1)"/><text class="tm" x="176" y="52" text-anchor="middle">ask a question</text>
-        <rect class="box" x="255" y="38" width="110" height="44" rx="8"/><text class="t" x="310" y="65" text-anchor="middle">Chatbot</text>
-        <line class="ln" x1="365" y1="60" x2="467" y2="60" marker-end="url(#a1)"/><text class="tm" x="416" y="52" text-anchor="middle">answers</text>
-        <rect class="box" x="470" y="38" width="120" height="44" rx="8"/><text class="t" x="530" y="65" text-anchor="middle">You do the work</text>
-
-        <text class="th" x="10" y="126">AGENT</text>
-        <rect class="box" x="10" y="138" width="90" height="44" rx="8"/><text class="t" x="55" y="165" text-anchor="middle">You</text>
-        <line class="ln" x1="100" y1="160" x2="252" y2="160" marker-end="url(#a1)"/><text class="tm" x="176" y="152" text-anchor="middle">give a goal</text>
-        <rect class="box-a" x="255" y="138" width="110" height="44" rx="8"/><text class="t" x="310" y="165" text-anchor="middle">Agent</text>
-        <line class="ln" x1="365" y1="160" x2="467" y2="160" marker-end="url(#a1)"/><text class="tm" x="416" y="152" text-anchor="middle">reports back</text>
-        <rect class="box" x="470" y="138" width="120" height="44" rx="8"/><text class="t" x="530" y="165" text-anchor="middle">Job done</text>
-        <text class="tm" x="310" y="208" text-anchor="middle">on the way it uses tools: a browser, code, your files</text>
-      </svg>
-      <figcaption>A chatbot tells you how. An agent does it.</figcaption>
-    </figure>
-
-    <h2>How an agent actually works</h2>
-    <p>Under the hood, an agent is just a loop. It looks at the goal, picks the next small step, does that step with a tool, and then checks what happened. If the job is not finished, it goes around again.</p>
-    <p>That is the whole idea. It is also why agents can feel so different from chatbots. They are not answering once. They keep trying, fixing, and checking until they think it is done.</p>
-
-    <figure>
-      <svg viewBox="0 0 600 200" role="img" aria-labelledby="f2t f2d">
-        <title id="f2t">The agent loop</title>
-        <desc id="f2d">Goal, pick next step, use a tool, check the result. If not done, repeat. If done, report back.</desc>
-        <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
-        <rect class="box" x="10" y="45" width="130" height="50" rx="8"/><text class="t" x="75" y="75" text-anchor="middle">Your goal</text>
-        <rect class="box" x="160" y="45" width="130" height="50" rx="8"/><text class="t" x="225" y="75" text-anchor="middle">Pick next step</text>
-        <rect class="box" x="310" y="45" width="130" height="50" rx="8"/><text class="t" x="375" y="75" text-anchor="middle">Use a tool</text>
-        <rect class="box-a" x="460" y="45" width="130" height="50" rx="8"/><text class="t" x="525" y="75" text-anchor="middle">Check result</text>
-        <line class="ln" x1="140" y1="70" x2="157" y2="70" marker-end="url(#a2)"/>
-        <line class="ln" x1="290" y1="70" x2="307" y2="70" marker-end="url(#a2)"/>
-        <line class="ln" x1="440" y1="70" x2="457" y2="70" marker-end="url(#a2)"/>
-        <path class="ln" d="M525,95 L525,140 L225,140 L225,98" marker-end="url(#a2)"/>
-        <text class="tm" x="375" y="134" text-anchor="middle">not done yet? go again</text>
-        <text class="tm" x="525" y="170" text-anchor="middle">done? tell you the result</text>
-      </svg>
-      <figcaption>The loop: pick a step, do it, check it, repeat.</figcaption>
-    </figure>
-
-    <h2>Three kinds you can try today</h2>
-    <p><strong>1. Coding agents.</strong> Tools like Claude Code, Cursor and GitHub Copilot's agent mode can read a whole project, change several files, and run tests. Code is a good place for agents because the computer tells them straight away if something is broken. Of the three kinds, these are the most reliable right now.</p>
-    <p><strong>2. Browser and computer agents.</strong> ChatGPT's agent mode and Claude's computer use can click around websites, fill in forms and collect information. They are handy for repetitive online tasks, but they are slower and make more mistakes than coding agents.</p>
-    <p><strong>3. No-code automation tools.</strong> Apps like n8n and Make let you connect an AI model to your email, spreadsheets or calendar by dragging blocks around. You do not need to write code, and they suit small jobs you repeat often.</p>
-
-    <h2>What changed for my billing chore</h2>
-    <p>With AI help, I built a small web app for my monthly bills. Now I type in the submeter readings and the bill amounts, and it splits the cost, adds any old balance, and writes the message for each tenant. I copy each one into WhatsApp and I am done.</p>
-
-    <figure>
-      <svg viewBox="0 0 600 250" role="img" aria-labelledby="f3t f3d">
-        <title id="f3t">Monthly billing before and after</title>
-        <desc id="f3d">Before: five manual steps. After: three steps with the app doing the maths and writing the messages.</desc>
-        <rect class="panel" x="10" y="10" width="280" height="230" rx="10"/>
-        <text class="th" x="28" y="38">BEFORE</text>
-        <text class="t" x="28" y="72" style="font-size:13px">1. Photograph each submeter</text>
-        <text class="t" x="28" y="101" style="font-size:13px">2. Read the total from the bill</text>
-        <text class="t" x="28" y="130" style="font-size:13px">3. Split the bill by hand</text>
-        <text class="t" x="28" y="159" style="font-size:13px">4. Check the MSEB calculator</text>
-        <text class="t" x="28" y="188" style="font-size:13px">5. Type every message myself</text>
-        <text class="tm" x="28" y="222">Five steps, lots of typing</text>
-
-        <rect class="panel" x="310" y="10" width="280" height="230" rx="10" style="stroke:var(--amber)"/>
-        <text class="th" x="328" y="38">AFTER</text>
-        <text class="t" x="328" y="72" style="font-size:13px">1. Photograph each submeter</text>
-        <text class="t" x="328" y="101" style="font-size:13px">2. Enter readings and amounts</text>
-        <text class="t" x="328" y="130" style="font-size:13px">3. Copy the ready messages</text>
-        <text class="tm" x="328" y="222">Three steps, the app does the maths</text>
-      </svg>
-      <figcaption>Same chore, fewer steps. The boring parts moved to the app.</figcaption>
-    </figure>
-
-    <p>I did not need to be an expert to do this. I described what I wanted in plain words, looked at what came back, and asked for changes. Some of the first versions did not work, and I had to say so and ask again. That back and forth is normal.</p>
-
-    <h2>How to start, step by step</h2>
-    <ol>
-      <li><strong>Pick one small task.</strong> Choose something boring that you do again and again. Avoid anything where a mistake would cost you money or upset someone.</li>
-      <li><strong>Say what "done" looks like.</strong> Tell it what you want, what to use, and what to leave alone. "Tidy my spreadsheet" is vague. "Remove duplicate rows and sort by date, but do not delete anything else" is much better.</li>
-      <li><strong>Watch the first few runs.</strong> Do not just read the final answer. Look at what it actually did, so you learn where you can trust it.</li>
-      <li><strong>Make the next task a little bigger.</strong> Once one task works well, try a slightly harder one.</li>
-    </ol>
-
-    <h2>Stay safe while you experiment</h2>
-    <p>An agent can take actions, so it can also take the wrong ones. A few habits help a lot.</p>
-    <ul>
-      <li><strong>Give it only the access it needs.</strong> If it only has to read one folder, do not give it your whole drive. For my billing app I use a GitHub token that works on a single private repository and nothing else.</li>
-      <li><strong>Approve anything you cannot undo.</strong> Sending emails, making payments and deleting files should always need your OK.</li>
-      <li><strong>Be careful with what it reads.</strong> A web page or document can hide instructions meant to trick an agent. Treat what it reads as information, not as orders.</li>
-      <li><strong>Keep backups.</strong> If something goes wrong, you want an easy way back to how things were.</li>
-    </ul>
-
-    <div class="note">Agents are helpful, but they still make mistakes. Always check the important results yourself, especially anything to do with money.</div>
-
-    <h2>Where I think this is going</h2>
-    <p>The tools are getting better fast, and there are now shared standards that make it easier to connect an agent to the apps and data you use. I do not think agents will replace careful people. I think people who know how to work with them will get more done, and get bored less often.</p>
-    <p>If you have been waiting on the sidelines, my advice is simple. Pick one small, dull task this week and let an agent try it. You will learn more from that one experiment than from reading ten more articles, including this one.</p>
-  </article>
-
-  <footer>© 2026 Vinod Pawar</footer>
+<main>
+<div class="wrap head">
+  <a class="back" href="/blog/">Back to blog</a>
+  <h1>AI agents in simple words: what they are and how to start</h1>
+  <time datetime="2026-09-28">28 September 2026</time>
 </div>
+
+<article><div class="wrap"><div class="prose">
+  <p class="lede">Everyone keeps saying "AI agents". I wanted to understand what that actually means, so I tried a few. Here is what I found, without the jargon.</p>
+
+  <h2>The chore that got me curious</h2>
+  <p>I own a house with a few tenants, and every month I did the same electricity bill routine. I took photos of each submeter. I read the total from the MSEB bill. I split it by hand, worked out one tenant's share on the MSEB website, and then typed a separate WhatsApp message to every tenant.</p>
+  <p>It was not hard. It was just boring, and boring jobs are exactly what AI tools are good at. That is what pushed me to look properly at AI agents, and then to build a small billing app with AI helping me along the way.</p>
+
+  <h2>So what is an AI agent?</h2>
+  <p>You already know chatbots. You ask a question, it gives an answer, and then it waits. If you want something done, you do it yourself.</p>
+  <p>An agent is different. You give it a goal, and it goes and works on it. It can open a website, edit a file, run a program, or check its own work. When it is finished, it comes back and tells you what happened.</p>
+  <figure class="fig">
+    <div class="fl"><b>Chatbot</b><span>You ask a question</span><i>→</i><span>Chatbot answers</span><i>→</i><span>You do the work</span></div>
+    <div class="fl"><b>Agent</b><span>You give a goal</span><i>→</i><span>Agent uses tools</span><i>→</i><span>Reports back, job done</span></div>
+    <figcaption>A chatbot tells you how. An agent does it.</figcaption>
+  </figure>
+
+  <h2>How an agent actually works</h2>
+  <p>Under the hood, an agent is just a loop. It looks at the goal, picks the next small step, does that step with a tool, and then checks what happened. If the job is not finished, it goes around again.</p>
+  <p>That is the whole idea. It is also why agents can feel so different from chatbots. They are not answering once. They keep trying, fixing, and checking until they think it is done.</p>
+  <figure class="fig">
+    <div class="loop"><span>Your goal</span><i>→</i><span>Pick next step</span><i>→</i><span>Use a tool</span><i>→</i><span>Check result</span><i>→</i><span>Not done? Go again. Done? Tell you.</span></div>
+    <figcaption>The loop: pick a step, do it, check it, repeat.</figcaption>
+  </figure>
+
+  <h2>Three kinds you can try today</h2>
+  <p><strong>1. Coding agents.</strong> Tools like Claude Code, Cursor and GitHub Copilot's agent mode can read a whole project, change several files, and run tests. Code is a good place for agents because the computer tells them straight away if something is broken. Of the three kinds, these are the most reliable right now.</p>
+  <p><strong>2. Browser and computer agents.</strong> ChatGPT's agent mode and Claude's computer use can click around websites, fill in forms and collect information. They are handy for repetitive online tasks, but they are slower and make more mistakes than coding agents.</p>
+  <p><strong>3. No-code automation tools.</strong> Apps like n8n and Make let you connect an AI model to your email, spreadsheets or calendar by dragging blocks around. You do not need to write code, and they suit small jobs you repeat often.</p>
+
+  <h2>What changed for my billing chore</h2>
+  <p>I built a small web app for my monthly bills. Now I type in the submeter readings and the bill amounts, and it splits the cost, adds any old balance, and writes the message for each tenant. I copy each one into WhatsApp and I am done.</p>
+  <figure class="fig">
+    <div class="ba">
+      <div><b>Before</b><ol><li>Photograph each submeter</li><li>Read the total from the bill</li><li>Split the bill by hand</li><li>Check the MSEB calculator</li><li>Type every message myself</li></ol><p>Five steps, lots of typing</p></div>
+      <div><b>After</b><ol><li>Photograph each submeter</li><li>Enter readings and amounts</li><li>Copy the ready messages</li></ol><p>Three steps, the app does the maths</p></div>
+    </div>
+    <figcaption>Same chore, fewer steps. The boring parts moved to the app.</figcaption>
+  </figure>
+  <p>I did not need to be an expert to do this. I described what I wanted in plain words, looked at what came back, and asked for changes. Some of the first versions did not work, and I had to say so and ask again. That back and forth is normal.</p>
+
+  <h2>How to start, step by step</h2>
+  <ol>
+    <li><strong>Pick one small task.</strong> Choose something boring that you do again and again. Avoid anything where a mistake would cost you money or upset someone.</li>
+    <li><strong>Say what "done" looks like.</strong> Tell it what you want, what to use, and what to leave alone. "Tidy my spreadsheet" is vague. "Remove duplicate rows and sort by date, but do not delete anything else" is much better.</li>
+    <li><strong>Watch the first few runs.</strong> Do not just read the final answer. Look at what it actually did, so you learn where you can trust it.</li>
+    <li><strong>Make the next task a little bigger.</strong> Once one task works well, try a slightly harder one.</li>
+  </ol>
+
+  <h2>Stay safe while you experiment</h2>
+  <p>An agent can take actions, so it can also take the wrong ones. A few habits help a lot.</p>
+  <ul>
+    <li><strong>Give it only the access it needs.</strong> If it only has to read one folder, do not give it your whole drive. For my billing app I use a GitHub token that works on a single private repository and nothing else.</li>
+    <li><strong>Approve anything you cannot undo.</strong> Sending emails, making payments and deleting files should always need your OK.</li>
+    <li><strong>Be careful with what it reads.</strong> A web page or document can hide instructions meant to trick an agent. Treat what it reads as information, not as orders.</li>
+    <li><strong>Keep backups.</strong> If something goes wrong, you want an easy way back to how things were.</li>
+  </ul>
+  <blockquote>Agents are helpful, but they still make mistakes. Always check the important results yourself, especially anything to do with money.</blockquote>
+
+  <h2>Where I think this is going</h2>
+  <p>The tools are getting better fast, and there are now shared standards that make it easier to connect an agent to the apps and data you use. I do not think agents will replace careful people. I think people who know how to work with them will get more done, and get bored less often.</p>
+  <p>If you have been waiting on the sidelines, my advice is simple. Pick one small, dull task this week and let an agent try it. You will learn more from that one experiment than from reading ten more articles, including this one.</p>
+
+</div></div></article>
+</main>
+
+<footer><div class="wrap">© <span id="y">2026</span> Vinod Pawar</div></footer>
+
+<script>
+var r=document.documentElement,s=null;
+try{s=localStorage.getItem('theme')}catch(e){}
+if(!s)s=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+r.dataset.theme=s;
+document.getElementById('theme').onclick=function(){s=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=s;try{localStorage.setItem('theme',s)}catch(e){}};
+document.getElementById('y').textContent=new Date().getFullYear();
+</script>
 </body>
 </html>
